@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Green Apple",
+        "price": 14.99,
+        "oldPrice": 20.99,
+        "discount": 50,
+        "rating": 4,
+        "image": "https://example.com/green-apple.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Red Apple",
+        "price": 12.49,
+        "oldPrice": 15.99,
+        "discount": 30,
+        "rating": 5,
+        "image": "https://example.com/red-apple.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Banana",
+        "price": 9.99,
+        "oldPrice": null,
+        "discount": null,
+        "rating": 3,
+        "image": "https://example.com/banana.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Strawberries",
+        "price": 7.99,
+        "oldPrice": 10.99,
+        "discount": 25,
+        "rating": 4.5,
+        "image": "https://example.com/strawberries.jpg"
+    }
+]
