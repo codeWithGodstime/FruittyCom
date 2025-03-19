@@ -1,6 +1,31 @@
 import { Heart, Eye, ShoppingBag } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
+import { DialogCloseButton } from "./dialog-content";
+
+// import {
+//     Dialog,
+//     DialogContent,
+//     DialogDescription,
+//     DialogHeader,
+//     DialogTitle,
+//     DialogTrigger,
+//   } from "@/components/ui/dialog"
+  
+
+{/* <Dialog>
+  <DialogTrigger>Open</DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Are you absolutely sure?</DialogTitle>
+      <DialogDescription>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </DialogDescription>
+    </DialogHeader>
+  </DialogContent>
+</Dialog> */}
+
 
 
 export function ProductCard({ product }) {
@@ -24,9 +49,10 @@ export function ProductCard({ product }) {
                         <Button className="bg-white p-2 rounded-full shadow hover:bg-gray-100">
                             <Heart size={18} className="text-gray-700" />
                         </Button>
-                        <Button className="bg-white p-2 rounded-full shadow hover:bg-gray-100">
+                        {/* <Button className="bg-white p-2 rounded-full shadow hover:bg-gray-100">
                             <Eye size={18} className="text-gray-700" />
-                        </Button>
+                        </Button> */}
+                        <DialogCloseButton />
                     </div>
                 }
             </div>

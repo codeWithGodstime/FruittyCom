@@ -19,7 +19,7 @@ const ProductSidebar = () => {
                 Filter
                 <FilterIcon />
             </Button>
-            <Accordion type="multiple" collapsible={false} className="w-full">
+            <Accordion type="multiple" className="w-full">
                 <AccordionItem value="item-1">
                     <AccordionTrigger>All Categories</AccordionTrigger>
                     <AccordionContent>

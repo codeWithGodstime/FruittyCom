@@ -1,9 +1,15 @@
-import { HeartIcon, MapPin, ShoppingBasket } from "lucide-react"
+"use client"
+import { HeartIcon, MapPin } from "lucide-react"
 import Link from "next/link"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
+import { CartDialog } from "./cart-dialog"
+import { useRouter } from "next/navigation"
 
 const Header = () => {
+    const router = useRouter()
+
+
     return (
         <div>
             {/* top header */}
@@ -15,9 +21,9 @@ const Header = () => {
                     </div>
 
                     <div className="space-x-2">
-                        <Link href={"/login"} className="hover:text-primary">Sign In</Link>
+                        <Link href={"/auth/signin"} className="hover:text-primary">Sign In</Link>
                         <span>/</span>
-                        <Link href={"/register"} className="hover:text-primary">Sign Up</Link>
+                        <Link href={"/auth/register"} className="hover:text-primary">Sign Up</Link>
                     </div>
                 </div>
             </div>
@@ -34,15 +40,12 @@ const Header = () => {
                     </div>
 
                     <div className="flex gap-1 items-center">
-                        <Button variant={'icon'}>
+                        <Button onClick={()=> router.push("/wishlist")} variant={'icon'}>
                             <HeartIcon />
                         </Button>
                         <span>|</span>
                         <span className="flex items-center gap-1">
-                            <Button variant={'icon'} className={"relative"}>
-                                <span className="bg-accent rounded-full p-1 text-background absolute right-0 top-0 w-4 h-4 text-xs flex items-center justify-center">2</span>
-                                <ShoppingBasket />
-                            </Button>
+                            <CartDialog />
 
                             <div className="flex flex-col text-xs ">
                                 <span className="text-[10px]">Shopping cart</span>
@@ -53,6 +56,51 @@ const Header = () => {
                         </span>
                     </div>
 
+                </div>
+            </div>
+
+            <div className="bg-black text-white py-2">
+                <div className="container mx-auto px-4 flex items-center gap-4 text-sm">
+                    <Link href="/" className="hover:text-green-400">
+                        Home
+                    </Link>
+                    <Link href="/shop" className="hover:text-green-400">
+                        Shop
+                    </Link>
+                    <Link href="/pages" className="hover:text-green-400">
+                        Pages
+                    </Link>
+                    <Link href="/blog" className="hover:text-green-400">
+                        Blog
+                    </Link>
+                    <Link href="/about" className="hover:text-green-400">
+                        About Us
+                    </Link>
+                    <Link href="/contact" className="hover:text-green-400">
+                        Contact Us
+                    </Link>
+                </div>
+
+
+            </div>
+
+            {/* breadcrumps */}
+            <div
+                className="bg-cover bg-center h-24 bg-accent-foreground"
+                style={{ backgroundImage: "url('/placeholder.svg?height=100&width=1200')" }}
+            >
+                <div className="container mx-auto px-4 h-full flex items-center">
+                    <div className="flex items-center gap-2 text-sm">
+                        <Link href="/" className="text-gray-600">
+                            Home
+                        </Link>
+                        <span className="text-gray-400">/</span>
+                        <Link href="/category/vegetables" className="text-gray-600">
+                            Vegetables
+                        </Link>
+                        <span className="text-gray-400">/</span>
+                        <span className="text-gray-800">Chinese Cabbage</span>
+                    </div>
                 </div>
             </div>
         </div>
