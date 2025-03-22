@@ -66,7 +66,7 @@ export default function RegisterPage() {
                   <FormControl>
                     <Input placeholder="Email" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className={"text-red-500"} />
                 </FormItem>
               )}
             />
@@ -89,7 +89,7 @@ export default function RegisterPage() {
                       </button>
                     </div>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className={"text-red-500"} />
                 </FormItem>
               )}
             />
@@ -116,7 +116,7 @@ export default function RegisterPage() {
                       </button>
                     </div>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className={"text-red-500"} />
                 </FormItem>
               )}
             />

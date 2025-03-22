@@ -8,8 +8,11 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Eye, EyeOff } from "lucide-react"
+import { Eye, EyeOff, Loader2 } from "lucide-react"
 import { useState } from "react"
+import { signIn } from "next-auth/react";
+import { toast } from "sonner"
+import {useRouter} from "next/navigation"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -21,8 +24,11 @@ const formSchema = z.object({
   rememberMe: z.boolean().default(false),
 })
 
+
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -33,9 +39,25 @@ export default function SignInPage() {
     },
   })
 
-  function onSubmit(values) {
-    console.log(values)
-    // Sign in logic
+  async function onSubmit(values) {
+    setLoading(true)
+    try {
+      const response = await signIn("credentials", {
+        ...values,
+        redirect: false,
+      });
+
+      if (!response || response.error) {
+        toast.error(response?.error || "Invalid email or password");
+      } else {
+        toast.success("Login successful!");
+        router.replace("/")
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -101,8 +123,15 @@ export default function SignInPage() {
               </Link>
             </div>
 
-            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
-              Sign In
+            <Button disabled={loading}>
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Signing In...
+                </>
+              ) : (
+                "Sign In"
+              )}
             </Button>
           </form>
         </Form>
