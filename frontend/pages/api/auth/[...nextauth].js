@@ -22,6 +22,7 @@ export const authOptions = {
           }
 
           const user = response.data; // ✅ Use response.data directly
+
           return user; // ✅ Ensure user object is returned
         } catch (error) {
           console.error("Login failed:", error.response?.data || error.message);
@@ -34,22 +35,18 @@ export const authOptions = {
   // ✅ Callbacks should be outside providers
   callbacks: {
     async jwt({ token, user }) {
-    //   console.log(token, user, "JWT called");
       if (user) {
-        token.access = user.access; // ✅ Save access token
-        token.refresh = user.refresh;
-        token.user = user.user;
+        token.accessToken = user.access;
+        token.refreshToken = user.refresh;
+        token.user = user.data;
       }
       return token;
     },
 
     async session({ session, token }) {
-    //   console.log(session, token, "Session called");
-      if (token) {
-        session.access = token.access; // ✅ Add access token to session
-        session.refresh = token.refresh;
-        session.user = token.user;
-      }
+      session.accessToken = token.accessToken;
+      session.refreshToken = token.refreshToken;
+      session.user = token.user;
       return session;
     },
   },
@@ -57,7 +54,17 @@ export const authOptions = {
   pages: {
     signIn: "/login",
   },
-
+  cookies: {
+    sessionToken: {
+      name: "access_token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production", // Secure only in production
+      },
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
 };
 

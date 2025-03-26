@@ -1,9 +1,30 @@
 "use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import QuantitySelector from "@/components/quantity-selector"
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { removeFromFavourite } from "@/lib/utils"
+import axiosInstance from "@/lib/axiosInstance"
+
+
+const getUserCart = async (page = 1) => {
+  try {
+    const response = await axiosInstance.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/get_user_cart/`,
+      {
+        params: { page },
+      }
+    );
+
+    return response.data; // Assuming DRF pagination structure
+  } catch (error) {
+    console.error("Error fetching wishlist:", error);
+    throw error; // Propagate error for handling in UI
+  }
+};
 
 export default function CartPage() {
   const cartItems = [
